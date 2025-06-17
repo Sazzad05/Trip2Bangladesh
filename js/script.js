@@ -4,6 +4,120 @@ console.log("Trip to Bangladesh By Sazzad Alam Bhuiyan.");
 let name = document.getElementById("name");
 let division = document.getElementById("division");
 let details = document.getElementById("details");
+let district_info = document.getElementById("district_info");
+
+let rows;
+
+let Barguna = 1;
+let Barisal = 2;
+let Bhola = 3;
+let Jhalokati = 4;
+let Patuakhali = 5;
+let Pirojpur = 6;
+let Bandarban = 7;
+let Brahmanbaria = 8;
+let Chandpur = 9;
+let Chattogram = 10;
+let Cumilla = 11;
+let Coxs_Bazar = 12;
+let Feni = 13;
+let Khagrachari = 14;
+let Lakshmipur = 15;
+let Noakhali = 16;
+let Rangamati = 17;
+let Dhaka = 18;
+let Faridpur = 19;
+let Gazipur = 20;
+let Gopalganj = 21;
+let Kishoreganj = 22;
+let Madaripur = 23;
+let Manikganj = 24;
+let Munshiganj = 25;
+let Narayanganj = 26;
+let Narsingdi = 27;
+let Rajbari = 28;
+let Shariatpur = 29;
+let Tangail = 30;
+let Bagerhat = 31;
+let Chuadanga = 32;
+let Jashore = 33;
+let Jhenaidah = 34;
+let Khulna = 35;
+let Kushtia = 36;
+let Magura = 37;
+let Meherpur = 38;
+let Narail = 39;
+let Satkhira = 40;
+let Jamalpur = 41;
+let Mymensingh = 42;
+let Netrokona = 43;
+let Sherpur = 44;
+let Bogura = 45;
+let Joypurhat = 46;
+let Naogaon = 47;
+let Natore = 48;
+let Nawabganj = 49;
+let Pabna = 50;
+let Rajshahi = 51;
+let Sirajganj = 52;
+let Dinajpur = 53;
+let Gaibandha = 54;
+let Kurigram = 55;
+let Lalmonirhat = 56;
+let Nilphamari = 57;
+let Panchagarh = 58;
+let Rangpur = 59;
+let Thakurgaon = 60;
+let Habiganj = 61;
+let Moulvibazar = 62;
+let Sunamganj = 63;
+let Sylhet = 64;
+
+let Division_data = 0;
+let District_Name_data = 1;
+let Area_data = 2;
+let Population_data = 3;
+let Upazila_data = 4;
+let Unions_data = 5;
+let Villages_data = 6;
+let Distance_frm_Dhk_data = 7;
+let district_ban_name = 8;
+let Discription = 9;
+let history = 10;
+let place = 11;
+let transportation = 12;
+
+// ----------------------------connect to spreadsheet-----------------------------------------------
+
+
+const url = 'https://script.google.com/macros/s/AKfycbz8dBh2nyidqn-ohu5IayBUYPeFV1mbXqCmB9Ff9Iw85skPVn6OO-qRGCYTv6h-6zXr/exec';
+
+    fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    rows = data.content;  // Access the array inside 'content'
+    if (Array.isArray(rows)) {
+      rows.forEach(row => {
+        console.log(row);
+        console.log(rows[8][0]);
+        const a2Value = rows[8][0];  // Get "Karim"
+        // document.getElementById('cellA2').textContent = a2Value;
+        
+        
+
+
+      });
+    } else {
+      console.error("content is not an array", rows);
+    }
+  })
+  .catch(err => console.error(err));
+
+
+
+
+
+// ---------------------------------------------------------------------------
 
 
 function playAudio(audioInfo){
@@ -37,55 +151,74 @@ function changeImage(district){
   // document.body.style.backgroundImage=`url(image/bg/${district}bg.jpg)`;
 }
 
-function districtInfo(district_name,district_division,district_area,district_population,disFromDhk, famousPlace){
+function districtInfo(district_name,district_division,district_area,district_population,district_Upazila,district_Unions,district_Villages,disFromDhk, district_ban_name, Discription, history, place, transportation){
   console.log("click");
-  name.innerText = district_name;
+  // name.innerText = district_name + " | " + district_ban_name;
+  name.innerText = district_name
   division.innerText = district_division+" Division";
-  details.innerHTML = `<b>Area: </b> ${district_area} km<sup>2</sup> <br>
-  <b>Popilation: </b> ${district_population} (2011) <br>
-  <b>Distance from Dhaka: </b> ${disFromDhk} km<br>  <br>
-  <b>Interesting places of ${district_name} : </b><br>
+  details.innerHTML = `</b><b>Area: </b> ${district_area} km<sup>2</sup> <br>
+                        <b>Population: </b> ${district_population} (2011) <br>
+                        <b>No of Upazilas: </b> ${district_Upazila} <br>
+                        <b>No of Unions: </b> ${district_Unions} <br>
+                        <b>No of Villages: </b> ${district_Villages} (2011) <br>
+                        <b>Distance from Dhaka: </b> ${disFromDhk} km<br>  <br>
+                        
   `;
 
-  for (let i=0;i<famousPlace.length;i++){
-    details.innerHTML += ` &#10687; ${famousPlace[i]} <br>`;
-  }
+  district_info.innerHTML = `<b> ${district_ban_name}</b> <br>
+                            ${Discription} <br><br>
+                            <b>ইতিহাস ঐতিহ্য </b>
+                            <br>${history} <br><br>
+                            <b>দর্শনীয় স্থান </b>
+                            <br>${place} <br><br>
+                            <b>যাতায়াত </b>
+                            <br>${transportation} <br><br>
+  `;
+
+  // for (let i=0;i<famousPlace.length;i++){
+  //   details.innerHTML += ` &#10687; ${famousPlace[i]} <br>`;
+  // }
 }
 
 
-
-// area,population,upozila,municipality,union,disFromDhk
-
-
-// ,1927.11,"1473787 (2011)",9,8,100,"107"
-
-
+function districtData(districtName){
+  districtInfo(rows[districtName][District_Name_data],
+                rows[districtName][Division_data],
+                rows[districtName][Area_data],
+                rows[districtName][Population_data],
+                rows[districtName][Upazila_data],
+                rows[districtName][Unions_data],
+                rows[districtName][Villages_data],
+                rows[districtName][Distance_frm_Dhk_data],
+                rows[districtName][district_ban_name],
+                rows[districtName][Discription],
+                rows[districtName][history],
+                rows[districtName][place],
+                rows[districtName][transportation],
+                );
+}
 
 
 
 
 
 function clickBrahmanbaria(){
-  let name = "Brahmanbaria";
-  let division = "Chottogram";
-  let area = 1927.11;
-  let population= 1473787;
-  let distanceFromDhaka=107;
-  let touristPlact=[
-  "Fort Stone Martyr’s Cemetery",
-  "Kella Shaheed Mazar",
-  "Natghar temple",
-  "Kachua shrine",
-  "Jayakumar zamindar’s house",
-  "Arifail Mosque",
-  "Shrine of Ayat Ullah Shah",
-  "Tighar Jamal Sagar Dighi",
-  "Shrine of Abdur Rahman Shah",
-  "MP Tila",
-  "Kalikachch Nandiparastha Dayamaya Anandadham",
-  "Dighirpar of Rasulullah Khan’s house"];
-  districtInfo(name,division,area,population,distanceFromDhaka,touristPlact);
+  let disName = Brahmanbaria;
+  // let touristPlact=[
+  // "Fort Stone Martyr’s Cemetery",
+  // "Kella Shaheed Mazar",
+  // "Natghar temple",
+  // "Kachua shrine",
+  // "Jayakumar zamindar’s house",
+  // "Arifail Mosque",
+  // "Shrine of Ayat Ullah Shah",
+  // "Tighar Jamal Sagar Dighi",
+  // "Shrine of Abdur Rahman Shah",
+  // "MP Tila",
+  // "Kalikachch Nandiparastha Dayamaya Anandadham",
+  // "Dighirpar of Rasulullah Khan’s house"];
   
+  districtData(disName);
   playAudio("audio/brahmanbaria.mp3");
   console.log("Brahmanbaria");
   setColor("brahmanbaria");
@@ -93,33 +226,13 @@ function clickBrahmanbaria(){
   changeImage("brahmanbaria"); 
 }
 
-function clickDhaka(){
-  let name = "Dhaka";
-  let division = "Dhaka";
-  let area =  1463.60;
-  let population= 12517361;
-  let distanceFromDhaka=0;
-  let touristPlact=[
-  "Ahsan Manzil",
-"Khan Mohammad Mridha Mosque",
-"Small cuts",
-"Big cut",
-"Bahadur Shah Park",
-"Hosseini Dalan",
-"Rayer Bazar slaughterhouse",
-"Ginger cosmetics",
-"The seven-domed mosque",
-"They are mosques",
-"Suhrawardy Udyan",
-"Dhaka Zoo",
-"Curzon Hall",
-"Central Shaheed Minar",
-"Rose Garden",
-"Elephant Lake",
-"Lalbagh Fort",
-"Jatiya Sangsad Bhaban"];  
-  districtInfo(name,division,area,population,distanceFromDhaka,touristPlact);
 
+
+function clickDhaka(){
+ 
+
+  
+  districtData(Dhaka);
   playAudio("audio/dhaka.mp3");
   console.log("Dhaka");
   setColor("dhaka");
@@ -128,27 +241,8 @@ function clickDhaka(){
 }
 
 function clickRajshahi(){
-  let name = "Rajshahia";
-  let division = "Rajshahi";
-  let area = 2497.92;
-  let population= 3220814;
-  let distanceFromDhaka=140.8;
-  let touristPlact=[
-  "Navaratna temple",
-  "Suchitra Sen’s Bhangabari village",
-  "Jayasagar Dighi",
-  "Elliott Bridge",
-  "Eco Park",
-  "The ladder of liberation",
-  "Yadav Chakraborty’s house",
-  "Home of Syed Ismail Hossain Siraj",
-  "Shrine of Bhola Dewan",
-  "Atgharia zamindar house",
-  "Shiva Durga Temple of Sanyal Zamindar Bari",
-  "Makimpur Zamindar Bari Mandir",
-  "Maulana Abdul Hamid Khan Bahanil Bari"];
-  districtInfo(name,division,area,population,distanceFromDhaka,touristPlact);
-
+  let disName = Rajshahi;
+  districtData(disName);
   playAudio("audio/rajshahi.mp3");
   setColor("rajshahi");
   selectorUpdate(54);
@@ -156,47 +250,16 @@ function clickRajshahi(){
 }
 
 function clickNilphamari(){
-  let name = "Nilphamari";
-  let division = "Rangpur";
-  let area = 2179.27;
-  let population= 2430627;
-  let distanceFromDhaka=267.1;
-  let touristPlact=[
-  "Balasoghat",
-  "Gaibandha Municipal Park",
-  "Rangpur Sugar Mills",
-  "Extension factory",
-  "The historic Shah Sultan Ghazi Mosque in Mir Bagan",
-  "Wall Masta Mosque",
-  "SKS In.",
-  "Friendship Center"];
-  districtInfo(name,division,area,population,distanceFromDhaka,touristPlact);
-
+  let disName = Nilphamari;
+  districtData(disName);
   playAudio("audio/nilphamari.mp3");
   setColor("nilphamari");
   selectorUpdate(47);
   changeImage("nilphamari");
 }
 function clickPanchagarh(){
-  let name = "Panchagarh";
-  let division = "Rangpur";
-  let area = 1404.63;
-  let population= 987644;
-  let distanceFromDhaka=414.7;
-  let touristPlact=[
-  "BMirzapur Shahi Mosque",
-  "Maharaja Dighi",
-  "Rocks Museum",
-  "Vitargarh is a fortified city",
-  "Banglabandha Zero Point",
-  "Vitargarh",
-  "Mirgarh",
-  "Asian Highway",
-  "Golak Dham Temple",
-  "Tetulia Post Bungalow",
-  "Maharaja Dighi"];
-  districtInfo(name,division,area,population,distanceFromDhaka,touristPlact);
-
+  let disName = Panchagarh;
+  districtData(disName);
   playAudio("audio/panchagarh.mp3");
   setColor("panchagarh");
   selectorUpdate(50);
@@ -204,26 +267,8 @@ function clickPanchagarh(){
 }
 
 function clickThakurgaon(){
-  let name = "Thakurgaon";
-  let division = "Rangpur";
-  let area = 1809.52;
-  let population= 1466877;
-  let distanceFromDhaka=405.9;
-  let touristPlact=[
-  "Shalban Mosque and Imambara",
-  "Khuniya Dighi Memorial",
-  "Sanga Shahi Mosque",
-  "Ranishankail",
-  "Goraksanath temple well",
-  "Haripur zamindar house",
-  "Harinmari Shiva Temple",
-  "Haripur Rajbari",
-  "Jagdal Rajbari",
-  "Mahal Rajbari",
-  "Rajvita",
-  "Jamalpur Zamindarbari Jame Mosque"];
-  districtInfo(name,division,area,population,distanceFromDhaka,touristPlact);
-
+  let disName = Thakurgaon;
+  districtData(disName);
   playAudio("audio/thakurgaon.mp3");
   setColor("thakurgaon");
   selectorUpdate(64);
@@ -231,21 +276,8 @@ function clickThakurgaon(){
 }
 
 function clickLalmonirhat(){
-  let name = "Lalmonirhat";
-  let division = "Rangpur";
-  let area = 1247.37;
-  let population= 1256099;
-  let distanceFromDhaka=337.9;
-  let touristPlact=[
-  "Three Bigha Corridor and Dahagram Angarpota enclave",
-  "Nidaria Mosque",
-  "Tusbhandar zamindar house",
-  "Kakina zamindar’s house",
-  "Burimari land port",
-  "Teesta Barrage and Leisure Rest House",
-  "The lost mosque"];
-  districtInfo(name,division,area,population,distanceFromDhaka,touristPlact);
-
+  let disName = Lalmonirhat;
+  districtData(disName);
   playAudio("audio/lalmonirhat.mp3");
   setColor("lalmonirhat");
   selectorUpdate(32);
@@ -253,20 +285,8 @@ function clickLalmonirhat(){
 }
 
 function clickDinajpur(){
-  let name = "Dinajpur";
-  let division = "Rangpur";
-  let area = 3444.30;
-  let population= 3109628;
-  let distanceFromDhaka=356.9;
-  let touristPlact=[
-  "Nayabad Mosque",
-  "Kantjiu Temple",
-  "Swapnapuri",
-  "The palace",
-  "Ram Sagar",
-  "Happiness Sea Ecopark"];
-  districtInfo(name,division,area,population,distanceFromDhaka,touristPlact);
-
+  let disName = Dinajpur;
+  districtData(disName);
   playAudio("audio/dinajpur.mp3");
   setColor("dinajpur");
   selectorUpdate(14);
@@ -274,474 +294,456 @@ function clickDinajpur(){
 }
 
 function clickRangpur(){
-  let name = "Rangpur";
-  let division = "Rangpur";
-  let area = 2400.56;
-  let population= 2996336;
-  let distanceFromDhaka=302.9;
-  let touristPlact=[
-  "Tajhat zamindar house",
-  "Chikli’s bill",
-  "Town Hall",
-  "Rangpur Zoo",
-  "Itkumari zamindar house",
-  "Dewan house zamindar house",
-  "Begum Rokeya Memorial Center",
-  "Ananda Nagar",
-  "Lahiri Hat slaughterhouse",
-  "Centennial tree",
-  "Ecopark",
-  "Nandina Dighi",
-  "Nine-domed mosque",
-  "Mithapukur Dighi"];
-  districtInfo(name,division,area,population,distanceFromDhaka,touristPlact);
-
+  let disName = Rangpur;
+  districtData(disName);
   playAudio("audio/rangpur.mp3");
   setColor("rangpur");
   selectorUpdate(56);
   changeImage("rangpur");
 }
 function clickKurigram(){
-  name.innerText = "Kurigram";
+  let disName = Kurigram;
+  districtData(disName);
   playAudio("audio/kurigram.mp3");
-  division.innerText = "Rangpur Division";
-  details.innerText = "";
   setColor("kurigram");
   selectorUpdate(29);
+  changeImage("kurigram");
 }
 function clickGaibandha(){
-  name.innerText = "Gaibandha";
+  let disName = Gaibandha;
+  districtData(disName);
   playAudio("audio/gaibandha.mp3");
-  division.innerText = "Rangpur Division";
-  details.innerText = "";
   setColor("gaibandha");
   selectorUpdate(17);
+  changeImage("gaibandha");
 }
 function clickJoypurhat(){
-  name.innerText = "Joypurhat";
+  let disName = Joypurhat;
+  districtData(disName);
   playAudio("audio/joypurhat.mp3");
-  division.innerText = "Rajshahi Division";
-  details.innerText = "";
   setColor("joypurhat");
   selectorUpdate(25);
+  changeImage("joypurhat")
 }
 function clickNaogaon(){
-  name.innerText = "Naogaon";
+  let disName = Naogaon;
+  districtData(disName);
   playAudio("audio/naogaon.mp3");
-  division.innerText = "Rajshahi Division";
-  details.innerText = "";
   setColor("naogaon");
   selectorUpdate(40);
+  changeImage("naogaon")
 }
 function clickNawabganj(){
-  name.innerText = "Chapai Nawabganj";
+  let disName = Nawabganj;
+  districtData(disName);
   playAudio("audio/nawabganj.mp3");
-  division.innerText = "Rajshahi Division";
-  details.innerText = "";
   setColor("nawabganj");
   selectorUpdate(45);
+  changeImage("nawabganj");
 }
 function clickBogra(){
-  name.innerText = "Bogra";
+  let disName = Bogura;
+  districtData(disName);
   playAudio("audio/bogra.mp3");
-  division.innerText = "Rajshahi Division";
-  details.innerText = "";
   setColor("bogra");
   selectorUpdate(6);
+  changeImage("bogra")
 }
 function clickNatore(){
-  name.innerText = "Natore";
+  let disName = Natore;
+  districtData(disName);
   playAudio("audio/natore.mp3");
-  division.innerText = "Rajshahi Division";
-  details.innerText = "";
   setColor("natore");
   selectorUpdate(44);
+  changeImage("natore")
 }
 function clickSirajganj(){
-  name.innerText = "Sirajganj";
+  let disName = Sirajganj;
+  districtData(disName);
   playAudio("audio/sirajganj.mp3");
-  division.innerText = "Rajshahi Division";
-  details.innerText = "";
   setColor("sirajganj");
   selectorUpdate(60);
+  changeImage("sirajganj")
 }
 function clickPabna(){
-  name.innerText = "Pabna";
+  let disName = Pabna;
+  districtData(disName);
   playAudio("audio/pabna.mp3");
-  division.innerText = "Rajshahi Division";
-  details.innerText = "";
   setColor("pabna");
   selectorUpdate(49);
+  changeImage("pabna")
 }
 function clickKushtia(){
-  name.innerText = "Kushtia";
+  let disName = Kushtia;
+  districtData(disName);
   playAudio("audio/kushtia.mp3");
-  division.innerText = "Khulna Division";
-  details.innerText = "";
   setColor("kushtia");
   selectorUpdate(30);
+  changeImage("kushtia");
 }
 function clickRajbari(){
-  name.innerText = "Rajbari";
+  let disName = Rajbari;
+  districtData(disName);
   playAudio("audio/rajbari.mp3");
-  division.innerText = "Dhaka Division";
-  details.innerText = "";
   setColor("rajbari");
   selectorUpdate(53);
+  changeImage("rajbari");
 }
 function clickMeherpur(){
-  name.innerText = "Meherpur";
+  let disName = Meherpur;
+  districtData(disName);
   playAudio("audio/meherpur.mp3");
-  division.innerText = "Khulna Division";
-  details.innerText = "";
   setColor("meherpur");
   selectorUpdate(37);
+  changeImage("meherpur");
 }
 function clickChuadanga(){
-  name.innerText = "Chuadanga";
+  let disName = Chuadanga;
+  districtData(disName);
   playAudio("audio/chuadanga.mp3");
-  division.innerText = "Khulna Division";
-  details.innerText = "";
   setColor("chuadanga");
   selectorUpdate(10);
+  changeImage("chuadanga");
 }
 function clickJhenaidah(){
-  name.innerText = "Jhenaidah";
+  let disName = Jhenaidah;
+  districtData(disName);
   playAudio("audio/jhenaidah.mp3");
-  division.innerText = "Khulna Division";
-  details.innerText = "";
   setColor("jhenaidah");
   selectorUpdate(24);
+  changeImage("jhenaidah");
 }
 function clickMagura(){
-  name.innerText = "Magura";
+  let disName = Magura;
+  districtData(disName);
   playAudio("audio/magura.mp3");
-  division.innerText = "Khulna Division";
-  details.innerText = "";
   setColor("magura");
   selectorUpdate(34);
+  changeImage("magura");
 }
 function clickJessore(){
-  name.innerText = "Jessore";
+  let disName = Jashore;
+  districtData(disName);
   playAudio("audio/jessore.mp3");
-  division.innerText = "Khulna Division";
-  details.innerText = "";
   setColor("jessore");
   selectorUpdate(22);
+  changeImage("jessore");
 }
 function clickNarail(){
-  name.innerText = "Narail";
+  let disName = Noakhali;
+  districtData(disName);
   playAudio("audio/narail.mp3");
-  division.innerText = "Khulna Division";
-  details.innerText = "";
   setColor("narail");
   selectorUpdate(41);
+  changeImage("narail");
 }
 function clickSatkhira(){
-  name.innerText = "Satkhira";
+  let disName = Satkhira;
+  districtData(disName);
   playAudio("audio/satkhira.mp3");
-  division.innerText = "Khulna Division";
-  details.innerText = "";
   setColor("satkhira");
   selectorUpdate(57);
+  changeImage("satkhira");
 }
 function clickKhulna(){
-  name.innerText = "Khulna";
+  let disName = Khulna;
+  districtData(disName);
   playAudio("audio/khulna.mp3");
-  division.innerText = "Khulna Division";
-  details.innerText = "";
   setColor("khulna");
   selectorUpdate(27);
+  changeImage("khulna");
 }
 function clickFaridpur(){
-  name.innerText = "Faridpur";
+  let disName = Faridpur;
+  districtData(disName);
   playAudio("audio/faridpur.mp3");
-  division.innerText = "Dhaka Division";
-  details.innerText = "";
   setColor("faridpur");
   selectorUpdate(15);
+  changeImage("faridpur");
 }
 function clickGopalganj(){
-  name.innerText = "Gopalganj";
+  let disName = Gopalganj;
+  districtData(disName);
   playAudio("audio/gopalganj.mp3");
-  division.innerText = "Dhaka Division";
-  details.innerText = "";
   setColor("gopalganj");
   selectorUpdate(19);
+  changeImage("gopalganj");
 }
 function clickBagerhat(){
-  name.innerText = "Bagerhat";
+  let disName = Bagerhat;
+  districtData(disName);
   playAudio("audio/bagerhat.mp3");
-  division.innerText = "Khulna Division";
-  details.innerText = "";
   setColor("bagerhat");
   selectorUpdate(1);
+  changeImage("bagerhat");
 }
 function clickJamalpur(){
-  name.innerText = "Jamalpur";
+  let disName = Jamalpur;
+  districtData(disName);
   playAudio("audio/jamalpur.mp3");
-  division.innerText = "Mymenshingh Division";
-  details.innerText = "";
   setColor("jamalpur");
   selectorUpdate(21);
+  changeImage("jamalpur")
 }
 function clickTangail(){
-  name.innerText = "Tangail";
+  let disName = Tangail;
+  districtData(disName);
   playAudio("audio/tangail.mp3");
-  division.innerText = "Mymenshingh Division";
-  details.innerText = "";
   setColor("tangail");
   selectorUpdate(63);
+  changeImage("tangail");
 }
 function clickManikganj(){
-  name.innerText = "Manikganj";
+  let disName = Manikganj;
+  districtData(disName);
   playAudio("audio/manikganj.mp3");
-  division.innerText = "Dhaka Division";
-  details.innerText = "";
   setColor("manikganj");
   selectorUpdate(35);
+  changeImage("manikganj");
 }
 
 function clickMadaripur(){
-  name.innerText = "Madaripur";
+  let disName = Madaripur;
+  districtData(disName);
   playAudio("audio/madaripur.mp3");
-  division.innerText = "Dhaka Division";
-  details.innerText = "";
   setColor("madaripur");
   selectorUpdate(33);
+  changeImage("madaripur");
 }
 function clickShariatpur(){
-  name.innerText = "Shariatpur";
+  let disName = Shariatpur;
+  districtData(disName);
   playAudio("audio/shariatpur.mp3");
-  division.innerText = "Dhaka Division";
-  details.innerText = "";
   setColor("shariatpur");
   selectorUpdate(58);
+  changeImage("shariatpur");
 }
 function clickGazipur(){
-  name.innerText = "Gazipur";
+  let disName = Gazipur;
+  districtData(disName);
   playAudio("audio/gazipur.mp3");
-  division.innerText = "Dhaka Division";
-  details.innerText = "";
   setColor("gazipur");
   selectorUpdate(18);
+  changeImage("gazipur");
 }
 function clickSherpur(){
-  name.innerText = "Sherpur";
+  let disName = Sherpur;
+  districtData(disName);
   playAudio("audio/sherpur.mp3");
-  division.innerText = "Mymenshingh Division";
-  details.innerText = "";
   setColor("sherpur");
   selectorUpdate(59);
+  changeImage("sherpur");
 }
 function clickMymenshingh(){
-  name.innerText = "Mymenshingh";
+  let disName = Mymensingh;
+  districtData(disName);
   playAudio("audio/mymenshingh.mp3");
-  division.innerText = "Mymenshingh Division";
-  details.innerText = "";
   setColor("mymenshingh");
   selectorUpdate(39);
+  changeImage("mymenshingh");
 }
 function clickKishoreganj(){
-  name.innerText = "Kishoreganj";
+  let disName = Kishoreganj;
+  districtData(disName);
   playAudio("audio/kishoreganj.mp3");
-  division.innerText = "Mymenshingh Division";
-  details.innerText = "";
   setColor("kishoreganj");
   selectorUpdate(28);
+  changeImage("kishoreganj");
 }
 function clickNetrokona(){
-  name.innerText = "Netrokona";
+  let disName = Netrokona;
+  districtData(disName);
   playAudio("audio/netrokona.mp3");
-  division.innerText = "Mymenshingh Division";
-  details.innerText = "";
   setColor("netrokona");
   selectorUpdate(46);
+  changeImage("netrokona");
 }
 function clickSunamganj(){
-  name.innerText = "Sunamganj";
+  let disName = Sunamganj;
+  districtData(disName);
   playAudio("audio/sunamganj.mp3");
-  division.innerText = "Sylhet Division";
-  details.innerText = "";
   setColor("sunamganj");
   selectorUpdate(61);
+  changeImage("sunamganj");
 }
 function clickSylhet(){
-  name.innerText = "Sylhet";
+  let disName = Sylhet;
+  districtData(disName);
   playAudio("audio/sylhet.mp3");
-  division.innerText = "Sylhet Division";
-  details.innerText = "";
   setColor("sylhet");
   selectorUpdate(62);
+  changeImage("sylhet");
 }
 function clickHabiganj(){
-  name.innerText = "Habiganj";
+  let disName = Habiganj;
+  districtData(disName);
   playAudio("audio/habiganj.mp3");
-  division.innerText = "Sylhet Division";
-  details.innerText = "";
   setColor("habiganj");
   selectorUpdate(20);
+  changeImage("habiganj");
 }
 function clickMoulovibazar(){
-  name.innerText = "Moulovibazar";
+  let disName = Moulvibazar;
+  districtData(disName);
   playAudio("audio/moulovibazar.mp3");
-  division.innerText = "Sylhet Division";
-  details.innerText = "";
   setColor("moulovibazar");
   selectorUpdate(36);
+  changeImage("moulovibazar");
 }
 function clickNarshingdi(){
-  name.innerText = "Narshingdi";
+  let disName = Narsingdi;
+  districtData(disName);
   playAudio("audio/narshingdi.mp3");
-  division.innerText = "Dhaka Division";
-  details.innerText = "";
   setColor("narshingdi");
   selectorUpdate(43);
+  changeImage("narshingdi");
 }
 function clickNarayanganj(){
-  name.innerText = "Narayanganj";
+  let disName = Narayanganj;
+  districtData(disName);
   playAudio("audio/narayanganj.mp3");
-  division.innerText = "Dhaka Division";
-  details.innerText = "";
   setColor("narayanganj");
   selectorUpdate(42);
+  changeImage("narayanganj");
 }
 
 function clickMunshiganj(){
-  name.innerText = "Munshiganj";
+  let disName = Munshiganj;
+  districtData(disName);
   playAudio("audio/munshiganj.mp3");
-  division.innerText = "Dhaka Division";
-  details.innerText = "";
   setColor("munshiganj");
   selectorUpdate(38);
+  changeImage("munshiganj");
 }
 function clickComilla(){
-  name.innerText = "Cumilla";
+  let disName = Cumilla;
+  districtData(disName);
   playAudio("audio/comilla.mp3");
-  division.innerText = "Chottogram Division";
-  details.innerText = "";
   setColor("comilla");
   selectorUpdate(11);
+  changeImage("comilla");
 }
 function clickChandpur(){
-  name.innerText = "Chandpur";
+  let disName = Chandpur;
+  districtData(disName);
   playAudio("audio/chandpur.mp3");
-  division.innerText = "Chottogram Division";
-  details.innerText = "";
   setColor("chandpur");
   selectorUpdate(8);
+  changeImage("chandpur");
 }
 function clickLaxmipur(){
-  name.innerText = "Laxmipur";
+  let disName = Lakshmipur;
+  districtData(disName);
   playAudio("audio/laxmipur.mp3");
-  division.innerText = "Chottogram Division";
-  details.innerText = "";
   setColor("laxmipur");
   selectorUpdate(31);
+  changeImage("laxmipur");
 }
 function clickPerojpur(){
-  name.innerText = "Pirojpur";
+  let disName = Pirojpur;
+  districtData(disName);
   playAudio("audio/perojpur.mp3");
-  division.innerText = "Barisal Division";
-  details.innerText = "";
   setColor("perojpur");
   selectorUpdate(52);
+  changeImage("perojpur");
 }
 function clickJhalokati(){
-  name.innerText = "Jhalokati";
+  let disName = Jhalokati;
+  districtData(disName);
   playAudio("audio/jhalokati.mp3");
-  division.innerText = "Barisal Division";
-  details.innerText = "";
   setColor("jhalokati");
   selectorUpdate(23);
+  changeImage("jhalokati");
 }
 function clickBarisal(){
-  name.innerText = "Barisal";
+  let disName = Barisal;
+  districtData(disName);
   playAudio("audio/barisal.mp3");
-  division.innerText = "Barisal Division";
-  details.innerText = "";
   setColor("barisal");
   selectorUpdate(4);
+  changeImage("barisal");
 }
 function clickBarguna(){
-  name.innerText = "Barguna";
+  let disName = Barguna;
+  districtData(disName);
   playAudio("audio/barguna.mp3");
-  division.innerText = "Barisal Division";
-  details.innerText = "";
   setColor("barguna");
   selectorUpdate(3);
+  changeImage("barguna");
+  
 }
 function clickPatuakhali(){
-  name.innerText = "Patuakhali";
+  let disName = Patuakhali;
+  districtData(disName);
   playAudio("audio/patuakhali.mp3");
-  division.innerText = "Barisal Division";
-  details.innerText = "";
   setColor("patuakhali");
   selectorUpdate(51);
+  changeImage("patuakhali");
 }
+
 function clickBhola(){
-  name.innerText = "Bhola";
+  let disName = Bhola;
+  districtData(disName);
   playAudio("audio/bhola.mp3");
-  division.innerText = "Barisal Division";
-  details.innerText = "";
   setColor("bhola");
   selectorUpdate(5);
+  changeImage("bhola");
 }
 function clickNoakhali(){
-  name.innerText = "Noakhali";
+  let disName = Noakhali;
+  districtData(disName);
   playAudio("audio/noakhali.mp3");
-  division.innerText = "Chottogram Division";
-  details.innerText = "";
   setColor("noakhali");
   selectorUpdate(48);
+  changeImage("noakhali");
 }
 function clickFeni(){
-  name.innerText = "Feni";
+  let disName = Feni;
+  districtData(disName);
   playAudio("audio/feni.mp3");
-  division.innerText = "Chottogram Division";
-  details.innerText = "";
   setColor("feni");
   selectorUpdate(16);
+  changeImage("feni");
 }
 function clickChottogram(){
-  name.innerText = "Chottogram";
+  let disName = Chattogram;
+  districtData(disName);
   playAudio("audio/chottogram.mp3");
-  division.innerText = "Chottogram Division";
-  details.innerText = "";
   setColor("chottogram");
   selectorUpdate(9);
+  changeImage("chottogram");
 }
 function clickKhagrachari(){
-  name.innerText = "Khagrachari";
+  let disName = Khagrachari;
+  districtData(disName);
   playAudio("audio/khagrachari.mp3");
-  division.innerText = "Chottogram Division";
-  details.innerText = "";
   setColor("khagrachari");
   selectorUpdate(26);
+  changeImage("khagrachari");
 }
 function clickCoxs_bazar(){
-  name.innerText = "Cox's bazar";
+  let disName = Coxs_Bazar;
+  districtData(disName);
   playAudio("audio/coxs_bazar.mp3");
-  division.innerText = "Chottogram Division";
-  details.innerText = "";
   setColor("coxs_bazar");
   selectorUpdate(12);
+  changeImage("coxs_bazar");
 }
 function clickBandarban(){
-  name.innerText = "Bandarban";
+  let disName = Bandarban;
+  districtData(disName);
   playAudio("audio/bandarban.mp3");
-  division.innerText = "Chottogram Division";
-  details.innerText = "";
   setColor("bandarban");
   selectorUpdate(2);
+  changeImage("bandarban");
 }
 function clickRangamati(){
-  name.innerText = "Rangamati";
+  let disName = Rangamati;
+  districtData(disName);
   playAudio("audio/rangamati.mp3");
-  division.innerText = "Chottogram Division";
-  details.innerText = "";
   setColor("rangamati");
   selectorUpdate(55);
+  changeImage("rangamati");
 }
 
 
